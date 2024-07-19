@@ -1,0 +1,40 @@
+.container {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.output {
+  background-color: #1e1e1e;
+  color: #00ff00;
+  padding: 10px;
+  width: 80%;
+  height: 50vh;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.input {
+  background-color: #1e1e1e;
+  color: #00ff00;
+  border: none;
+  padding: 10px;
+  width: 80%;
+  border-radius: 5px;
+}
+
+.input::placeholder {
+  color: #00ff00;
+}
