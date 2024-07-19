@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { createFullName } from '../lib/getFullName';
+import styles from '../styles/Home.module.css';
 
 const Home = () => {
   const [userInput, setUserInput] = useState('');
@@ -7,41 +8,48 @@ const Home = () => {
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
 
-  const handleSubmit = async (input) => {
-    const result = await createFullName(input);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await createFullName(userInput);
     setFullName(result);
     setOutput(prevOutput => [...prevOutput, `> ${command}`, result]);
     setCommand('');
   };
 
   const handleCommand = (e) => {
-    setCommand(e.target.value);
     if (e.key === 'Enter') {
+      e.preventDefault();
       const input = e.target.value;
       if (input.startsWith('input ')) {
-        const userInput = input.slice(6);
-        setUserInput(userInput);
-        handleSubmit(userInput);
+        setUserInput(input.slice(6));
+        handleSubmit(e);
+      } else {
+        setOutput(prevOutput => [...prevOutput, `> ${input}`, 'Unknown command']);
       }
+    } else {
+      setCommand(e.target.value);
     }
   };
 
   return (
-    <div style={{ backgroundColor: 'black', color: 'white', padding: '20px', fontFamily: 'monospace' }}>
-      <h1>Command Line Interface</h1>
-      <div>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Command Line Interface</h1>
+      <div className={styles.output}>
         {output.map((line, index) => (
           <div key={index}>{line}</div>
         ))}
       </div>
-      <input
-        type="text"
-        value={command}
-        onChange={(e) => setCommand(e.target.value)}
-        onKeyDown={handleCommand}
-        style={{ backgroundColor: 'black', color: 'white', border: 'none', width: '100%' }}
-        autoFocus
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={command}
+          onChange={(e) => setCommand(e.target.value)}
+          onKeyDown={handleCommand}
+          className={styles.input}
+          placeholder="Enter command"
+          autoFocus
+        />
+      </form>
     </div>
   );
 };
