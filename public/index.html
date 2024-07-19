@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { createFullName } from '../lib/getFullName'
+import { useState } from 'react';
+import { createFullName } from '../lib/getFullName';
 
 const Home = () => {
-  const [userInput, setUserInput] = useState('')
-  const [fullName, setFullName] = useState('')
+  const [userInput, setUserInput] = useState('');
+  const [fullName, setFullName] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const result = await createFullName(userInput)
-    setFullName(result)
-  }
+    e.preventDefault();
+    const result = await createFullName(userInput);
+    setFullName(result);
+  };
 
   return (
     <div>
@@ -30,7 +30,7 @@ const Home = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
