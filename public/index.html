@@ -7,9 +7,8 @@ const Home = () => {
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const result = await createFullName(userInput);
+  const handleSubmit = async (input) => {
+    const result = await createFullName(input);
     setFullName(result);
     setOutput(prevOutput => [...prevOutput, `> ${command}`, result]);
     setCommand('');
@@ -20,8 +19,9 @@ const Home = () => {
     if (e.key === 'Enter') {
       const input = e.target.value;
       if (input.startsWith('input ')) {
-        setUserInput(input.slice(6));
-        handleSubmit(e);
+        const userInput = input.slice(6);
+        setUserInput(userInput);
+        handleSubmit(userInput);
       }
     }
   };
@@ -37,7 +37,7 @@ const Home = () => {
       <input
         type="text"
         value={command}
-        onChange={handleCommand}
+        onChange={(e) => setCommand(e.target.value)}
         onKeyDown={handleCommand}
         style={{ backgroundColor: 'black', color: 'white', border: 'none', width: '100%' }}
         autoFocus
