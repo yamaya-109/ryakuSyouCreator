@@ -1,13 +1,22 @@
 {
-  "name": "memo-sharing-server",
+  "name": "ryakuSyouCreator",
   "version": "1.0.0",
-  "main": "api/memos.js",
+  "main": "pages/index.js",
   "scripts": {
-    "start": "node api/memos.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "@supabase/supabase-js": "^1.29.4",
     "dotenv": "^10.0.0",
-    "@supabase/supabase-js": "^1.29.4"
+    "express": "^4.17.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-next": "latest"
   }
 }
