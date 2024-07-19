@@ -1,31 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abbreviation to Full Name</title>
-</head>
-<body>
-    <form id="inputForm">
-        <input type="text" id="userInput" name="userInput" placeholder="Enter abbreviation">
-        <button type="submit">Submit</button>
-    </form>
-    <div id="result"></div>
+import { useState } from 'react'
+import { createFullName } from '../lib/getFullName'
 
-    <script>
-        document.getElementById('inputForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const userInput = document.getElementById('userInput').value;
-            const response = await fetch('/api/convert', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ userInput })
-            });
-            const data = await response.json();
-            document.getElementById('result').innerText = data.fullName;
-        });
-    </script>
-</body>
-</html>
+const Home = () => {
+  const [userInput, setUserInput] = useState('')
+  const [fullName, setFullName] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const result = await createFullName(userInput)
+    setFullName(result)
+  }
+
+  return (
+    <div>
+      <h1>Create Full Name</h1>
+      <form onSubmit={handleSubmit}>
+        <input 
+          type="text" 
+          value={userInput} 
+          onChange={(e) => setUserInput(e.target.value)} 
+          placeholder="Enter abbreviation" 
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {fullName && (
+        <div>
+          <h2>Full Name</h2>
+          <p>{fullName}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default Home
