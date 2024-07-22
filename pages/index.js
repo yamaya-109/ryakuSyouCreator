@@ -10,6 +10,7 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('User input:', userInput);
     const result = await createFullName(userInput);
     setFullNames(result);
     setOutput(prevOutput => [...prevOutput, `> ${command}`, ...result.map(item => `${item.SeishikiName}: ${item.explanation}`)]);
@@ -20,6 +21,7 @@ const Home = () => {
     if (e.key === 'Enter') {
       e.preventDefault();
       const input = e.target.value;
+      console.log('Command received:', input);
       if (input.startsWith('input ')) {
         setUserInput(input.slice(6));
         await handleSubmit(e);
