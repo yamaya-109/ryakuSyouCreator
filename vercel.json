@@ -2,16 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/memos.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**/*",
-      "use": "@vercel/static"
+      "src": "next.config.js",
+      "use": "@vercel/next"
     }
-  ],
-  "routes": [
-    { "src": "/api/memos", "dest": "/api/memos.js" },
-    { "src": "/", "dest": "/public/index.html" }
   ]
 }
