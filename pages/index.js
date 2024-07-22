@@ -28,7 +28,8 @@ const Home = () => {
       const input = e.target.value;
       console.log('Command received:', input);
       if (input.startsWith('input ')) {
-        setUserInput(input.slice(6));
+        const newInput = input.slice(6);
+        setUserInput(newInput);
         await handleSubmit(e);
       } else {
         setOutput(prevOutput => [...prevOutput, `> ${input}`, 'Unknown command']);
