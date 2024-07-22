@@ -11,9 +11,14 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('User input:', userInput);
-    const result = await createFullName(userInput);
-    setFullNames(result);
-    setOutput(prevOutput => [...prevOutput, `> ${command}`, ...result.map(item => `${item.SeishikiName}: ${item.explanation}`)]);
+    try {
+      const result = await createFullName(userInput);
+      setFullNames(result);
+      setOutput(prevOutput => [...prevOutput, `> ${command}`, ...result.map(item => `${item.SeishikiName}: ${item.explanation}`)]);
+    } catch (error) {
+      console.error('Error creating full name:', error);
+      setOutput(prevOutput => [...prevOutput, `> ${command}`, 'Error creating full name']);
+    }
     setCommand('');
   };
 
