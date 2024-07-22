@@ -8,8 +8,7 @@ const Home = () => {
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     console.log('User input:', userInput);
     try {
       const result = await createFullName(userInput);
@@ -30,7 +29,7 @@ const Home = () => {
       if (input.startsWith('input ')) {
         const newInput = input.slice(6);
         setUserInput(newInput);
-        await handleSubmit(e);
+        await handleSubmit();
       } else {
         setOutput(prevOutput => [...prevOutput, `> ${input}`, 'Unknown command']);
       }
@@ -48,7 +47,7 @@ const Home = () => {
           <div key={index}>{line}</div>
         ))}
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={e => e.preventDefault()}>
         <input
           type="text"
           id="commandInput"
