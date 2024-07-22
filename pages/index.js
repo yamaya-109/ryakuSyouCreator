@@ -12,6 +12,7 @@ const Home = () => {
     console.log('User input:', userInput);
     try {
       const result = await createFullName(userInput);
+      console.log('Full names fetched:', result);
       setFullNames(result);
       setOutput(prevOutput => [...prevOutput, `> ${command}`, ...result.map(item => `${item.Tip}: ${item.SeishikiName} - ${item.explanation}`)]);
     } catch (error) {
@@ -28,6 +29,7 @@ const Home = () => {
       console.log('Command received:', input);
       if (input.startsWith('input ')) {
         const newInput = input.slice(6);
+        console.log('Setting user input:', newInput);
         setUserInput(newInput);
         await handleSubmit();
       } else {
