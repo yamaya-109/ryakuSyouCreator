@@ -4,15 +4,15 @@ import styles from '../styles/Home.module.css';
 
 const Home = () => {
   const [userInput, setUserInput] = useState('');
-  const [fullName, setFullName] = useState('');
+  const [fullNames, setFullNames] = useState([]);
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await createFullName(userInput);
-    setFullName(result);
-    setOutput(prevOutput => [...prevOutput, `> ${command}`, result]);
+    setFullNames(result);
+    setOutput(prevOutput => [...prevOutput, `> ${command}`, ...result.map(item => `${item.SeishikiName}: ${item.explanation}`)]);
     setCommand('');
   };
 
