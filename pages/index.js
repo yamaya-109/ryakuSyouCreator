@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createFullName } from '../lib/getFullName';
 import styles from '../styles/Home.module.css';
 
@@ -7,6 +7,12 @@ const Home = () => {
   const [fullNames, setFullNames] = useState([]);
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
+
+  useEffect(() => {
+    if (userInput) {
+      handleSubmit();
+    }
+  }, [userInput]);
 
   const handleSubmit = async () => {
     console.log('User input:', userInput);
@@ -31,7 +37,6 @@ const Home = () => {
         const newInput = input.slice(6);
         console.log('Setting user input:', newInput);
         setUserInput(newInput);
-        await handleSubmit();
       } else {
         setOutput(prevOutput => [...prevOutput, `> ${input}`, 'Unknown command']);
       }
