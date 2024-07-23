@@ -31,7 +31,7 @@ const Home = () => {
         const newInput = input.slice(6);
         console.log('Setting user input:', newInput);
         setUserInput(newInput);
-        handleSubmit();  // 追加: Enterキーを押したらhandleSubmitを呼び出す
+        handleSubmit();  // Enterキーを押したらhandleSubmitを呼び出す
       } else {
         setOutput(prevOutput => [...prevOutput, `> ${input}`, 'Unknown command']);
       }
