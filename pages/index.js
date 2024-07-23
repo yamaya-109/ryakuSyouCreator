@@ -20,12 +20,18 @@ const Home = () => {
       const finalName = result.map(item => item.seishikiname).join('');
       setFinalName(finalName);
 
-      setOutput(prevOutput => [
-        ...prevOutput, 
-        `> ${command}`, 
-        ...result.map(item => `${item.tip}: ${item.seishikiname} - ${item.explanation}`),
-        `\n\nFinal Name: ${finalName}`  // 最後に連結された名前を表示
-      ]);
+      // outputを更新
+      let newOutput = [
+        ...output,
+        `> ${command}`,
+        ...result.map(item => `${item.tip}: ${item.seishikiname} - ${item.explanation}`)
+      ];
+
+      if (finalName) {
+        newOutput.push(`Final Name: ${finalName}`);
+      }
+
+      setOutput(newOutput);
     } catch (error) {
       console.error('Error creating full name:', error);
       setOutput(prevOutput => [...prevOutput, `> ${command}`, 'Error creating full name']);
