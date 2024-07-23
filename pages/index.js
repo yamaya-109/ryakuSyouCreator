@@ -7,7 +7,7 @@ const Home = () => {
   const [fullNames, setFullNames] = useState([]);
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
-  const [finalName, setFinalName] = useState('');  // 追加
+  const [finalName, setFinalName] = useState('');
 
   const handleSubmit = async () => {
     console.log('User input:', userInput);
@@ -20,18 +20,19 @@ const Home = () => {
       const finalName = result.map(item => item.seishikiname).join('');
       setFinalName(finalName);
 
-      // outputを更新
-      let newOutput = [
-        ...output,
-        `> ${command}`,
-        ...result.map(item => `${item.tip}: ${item.seishikiname} - ${item.explanation}`)
-      ];
-
       if (finalName) {
-        newOutput.push(`Final Name: ${finalName}`);
-      }
+        // outputを更新
+        let newOutput = [
+          `> ${command}`,
+          ...result.map(item => `${item.tip}: ${item.seishikiname} - ${item.explanation}`),
+          `Final Name: ${finalName}`
+        ];
 
-      setOutput(newOutput);
+        setOutput(prevOutput => [...prevOutput, ...newOutput]);
+      } else {
+        // 再度handleSubmitを呼び出す
+        handleSubmit();
+      }
     } catch (error) {
       console.error('Error creating full name:', error);
       setOutput(prevOutput => [...prevOutput, `> ${command}`, 'Error creating full name']);
