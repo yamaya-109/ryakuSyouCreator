@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { createFullName } from '../lib/getFullName';
+import { useState } from 'react';
+import { createFullName, testSupabaseConnection } from '../lib/getFullName';
 import styles from '../styles/Home.module.css';
 
 const Home = () => {
@@ -7,12 +7,6 @@ const Home = () => {
   const [fullNames, setFullNames] = useState([]);
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
-
-  useEffect(() => {
-    if (userInput) {
-      handleSubmit();
-    }
-  }, [userInput]);
 
   const handleSubmit = async () => {
     console.log('User input:', userInput);
@@ -46,6 +40,10 @@ const Home = () => {
     }
   };
 
+  const testConnection = async () => {
+    await testSupabaseConnection();
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Command Line Interface</h1>
@@ -67,6 +65,7 @@ const Home = () => {
           autoFocus
         />
       </form>
+      <button onClick={testConnection} className={styles.button}>Test Supabase Connection</button>
     </div>
   );
 };
