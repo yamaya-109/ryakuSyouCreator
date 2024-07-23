@@ -14,7 +14,7 @@ const Home = () => {
       const result = await createFullName(userInput);
       console.log('Full names fetched:', result);
       setFullNames(result);
-      setOutput(prevOutput => [...prevOutput, `> ${command}`, ...result.map(item => `${item.tip}: ${item.seishikiName} - ${item.explanation}`)]);
+      setOutput(prevOutput => [...prevOutput, `> ${command}`, ...result.map(item => `${item.tip}: ${item.seishikiname} - ${item.explanation}`)]);
     } catch (error) {
       console.error('Error creating full name:', error);
       setOutput(prevOutput => [...prevOutput, `> ${command}`, 'Error creating full name']);
