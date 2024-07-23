@@ -24,7 +24,7 @@ const Home = () => {
         ...prevOutput, 
         `> ${command}`, 
         ...result.map(item => `${item.tip}: ${item.seishikiname} - ${item.explanation}`),
-        `Final Name: ${finalName}`  // 最後に連結された名前を表示
+        `\n\nFinal Name: ${finalName}`  // 最後に連結された名前を表示
       ]);
     } catch (error) {
       console.error('Error creating full name:', error);
